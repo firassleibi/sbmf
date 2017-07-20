@@ -127,6 +127,81 @@ $(function() {
                 $("#jsGrid-page").jsGrid("openPage", page);
             });
             // Custom View
+			$('#spec').on('change', function() {
+				selected=this;							 
+			  $("#jsGrid-custom").jsGrid({
+                height: "70%",
+                width: "100%",
+                filtering: true,
+                editing: false,
+                sorting: true,
+                paging: true,
+                autoload: true,
+                pageSize: 15,
+                pageButtonCount: 5,
+                controller: {
+                    loadData: function(filter) {
+                        var d = $.Deferred();
+
+                        $.get('api/budget/'+selected.value, {"filter":filter}).done(function(response) {
+                            console.log(response);
+                            d.resolve(response);
+                        });
+                        return d.promise();
+                    }
+                },
+                fields: [
+                    { name: "programName", type: "text", title: ""},
+                    { name: "scopeName", type: "text", title: ""},
+                    { name: "projectPercent", type: "text", title: "" },
+                    { name: "programPercent", width: "110px", type: "text", title: "" },
+                    { name: "scopePercent", type: "text", title: "" },
+                    { name: "projectBudget", type: "text", title: "" },
+                    { name: "programBudget", width: "110px", type: "text", title: "" },
+                    { name: "scopeBudget", type: "text", title: "" },
+                    { name: "total", type: "text", title: "" },
+                    { name: "m1", type: "text", title: "" },
+                    { name: "m2", type: "text", title: "" },
+                    { name: "m3", type: "text", title: "" },
+                    { name: "m4", type: "text", title: "" },
+                    { name: "m5", type: "text", title: "" },
+                    { name: "m6", type: "text", title: "" },
+                    { name: "m7", type: "text", title: "" },
+                    { name: "m8", type: "text", title: "" },
+                    { name: "m9", type: "text", title: "" },
+                    { name: "m10", type: "text", title: "" },
+                    { name: "m11", type: "text", title: "" },
+                    { name: "m12", type: "text", title: "" },
+                    { name: "Q1", type: "text", title: "" },
+                    { name: "Q2", type: "text", title: "" },
+                    { name: "Q3", type: "text", title: "" },
+                    { name: "Q4", type: "text", title: "" },
+                    { name: "projectSpend", type: "text", title: "" },
+                    { name: "projectRemain", type: "text", title: "" },
+                    { name: "scopeSpend", type: "text", title: "" },
+                    { name: "programSpend", type: "text", title: "" },
+                    { name: "Sch_M1", type: "text", title: "" },
+                    { name: "Sch_M2", type: "text", title: "" },
+                    { name: "Sch_M3", type: "text", title: "" }, 
+                    { name: "Sch_M4", type: "text", title: "" },
+                    { name: "Sch_M5", type: "text", title: "" },
+                    { name: "Sch_M6", type: "text", title: "" },
+                    { name: "Sch_M7", type: "text", title: "" },
+                    { name: "Sch_M8", type: "text", title: "" },
+                    { name: "Sch_M9", type: "text", title: "" },
+                    { name: "Sch_M10", type: "text", title: "" },
+                    { name: "Sch_M11", type: "text", title: "" },
+                    { name: "Sch_M12", type: "text", title: "" },
+                    { name: "Sch_Total", type: "text", title: "" },
+                    { name: "Sch_Q1", type: "text", title: "" },
+                    { name: "Sch_Q2", type: "text", title: "" },
+                    { name: "Sch_Q3", type: "text", title: "" },
+                    { name: "Sch_Q4", type: "text", title: "" },
+
+                ]
+            });
+			})
+		
             $("#jsGrid-custom").jsGrid({
                 height: "70%",
                 width: "100%",
@@ -139,6 +214,7 @@ $(function() {
                 pageButtonCount: 5,
                 controller: {
                     loadData: function(filter) {
+						
                         var d = $.Deferred();
 
                         $.get('api/budget', {"filter":filter}).done(function(response) {
@@ -255,6 +331,7 @@ $(function() {
                 ]
             });
             $(".config-panel input[type=checkbox]").on("click", function() {
+																		 
                 var $cb = $(this);
                 $("#jsGrid-custom").jsGrid("option", $cb.attr("id"), $cb.is(":checked"));
             });

@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('budget', 'SmbfController@getBudgetJsGrid');
+Route::get('budget/{id}', 'SmbfController@getBudgetJsGrid');
 Route::get('payment', 'SmbfController@getBudgetJsGridd');

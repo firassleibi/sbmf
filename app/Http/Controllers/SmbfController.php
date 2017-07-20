@@ -21,7 +21,8 @@ class SmbfController extends Controller
         return view('payment');
     }
 
-    public function getBudgetJsGrid(){
+    public function getBudgetJsGrid($specialist='0'){
+		
     	//dd(request()->input());
     	$fProjectName = request()->input('filter.projectName');
         $fProgramName = request()->input('filter.programName');
@@ -212,6 +213,9 @@ class SmbfController extends Controller
         if($fSch_Q4){
             $query->where('Sch_Q4', 'like', "%{$fSch_Q4}%");
         }
+		if($specialist!='0'){
+			$query->where('specialist', '=', $specialist);
+		}
     	return $query->get();
     }
 
